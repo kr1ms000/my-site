@@ -3,70 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мой сайт</title>
+  <title>VLKR — Discord Server</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
     body { background: #0f0f13; color: #fff; line-height: 1.6; }
-    header { padding: 20px; text-align: center; background: #1a1a22; border-bottom: 2px solid #ff3c00; }
-    header h1 { color: #ff3c00; font-size: 28px; }
+
+    header {
+      padding: 20px; text-align: center;
+      background: #1a1a22; border-bottom: 2px solid #5865F2;
+      position: relative;
+    }
+    header h1 { color: #5865F2; font-size: 28px; letter-spacing: 3px; }
     nav { margin-top: 10px; }
-    nav a { color: #ccc; margin: 0 10px; text-decoration: none; font-size: 16px; }
-    nav a:hover { color: #ff3c00; }
-    .hero { padding: 60px 20px; text-align: center; background: linear-gradient(135deg, #1a1a22, #0f0f13); }
+    nav a {
+      color: #ccc; margin: 0 10px; text-decoration: none;
+      font-size: 16px; transition: 0.2s;
+    }
+    nav a:hover { color: #5865F2; }
+
+    #editBtn {
+      position: absolute; top: 12px; right: 12px;
+      background: #5865F2; color: #fff; border: none;
+      padding: 8px 14px; border-radius: 6px; font-size: 13px;
+      cursor: pointer;
+    }
+    #editBtn:hover { background: #4752c4; }
+
+    .hero {
+      padding: 70px 20px 60px; text-align: center;
+      background: linear-gradient(135deg, #1a1a22, #0f0f13);
+    }
+
+    .brand {
+      font-size: 96px;
+      font-weight: 900;
+      letter-spacing: 12px;
+      color: #5865F2;
+      text-shadow:
+        0 0 20px rgba(88, 101, 242, 0.8),
+        0 0 40px rgba(88, 101, 242, 0.5),
+        0 0 80px rgba(88, 101, 242, 0.3);
+      margin-bottom: 20px;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { text-shadow: 0 0 20px rgba(88,101,242,0.8), 0 0 40px rgba(88,101,242,0.5), 0 0 80px rgba(88,101,242,0.3); }
+      50% { text-shadow: 0 0 30px rgba(88,101,242,1), 0 0 60px rgba(88,101,242,0.7), 0 0 100px rgba(88,101,242,0.5); }
+    }
+
     .hero h2 { font-size: 32px; margin-bottom: 15px; }
     .hero p { color: #aaa; max-width: 500px; margin: 0 auto 25px; }
-    .btn { display: inline-block; padding: 12px 28px; background: #ff3c00; color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; }
-    .btn:hover { background: #cc3000; }
-    .features { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 40px 20px; }
-    .card { background: #1a1a22; padding: 25px; border-radius: 12px; width: 260px; text-align: center; border: 1px solid #2a2a35; }
-    .card h3 { color: #ff3c00; margin-bottom: 10px; }
+
+    .btn {
+      display: inline-block; padding: 14px 32px;
+      background: #ff3c00; color: #fff; text-decoration: none;
+      border-radius: 8px; font-weight: bold; margin: 6px;
+      transition: 0.2s;
+    }
+    .btn:hover { background: #cc3000; transform: translateY(-2px); }
+
+    .btn-discord { background: #5865F2; }
+    .btn-discord:hover { background: #4752c4; }
+
+    .features {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 20px; padding: 40px 20px;
+    }
+    .card {
+      background: #1a1a22; padding: 25px; border-radius: 12px;
+      width: 260px; text-align: center;
+      border: 1px solid #2a2a35; transition: 0.2s;
+    }
+    .card:hover { border-color: #5865F2; transform: translateY(-3px); }
+    .card h3 { color: #5865F2; margin-bottom: 10px; }
     .card p { color: #aaa; font-size: 14px; }
-    footer { text-align: center; padding: 25px; background: #1a1a22; color: #666; font-size: 14px; border-top: 1px solid #2a2a35; }
+
+    .join-section {
+      text-align: center; padding: 50px 20px;
+      background: linear-gradient(135deg, #5865F2, #4752c4);
+      margin: 20px 0;
+    }
+    .join-section h2 { font-size: 28px; margin-bottom: 15px; }
+    .join-section p { margin-bottom: 25px; opacity: 0.9; }
+    .join-section .btn {
+      background: #fff; color: #5865F2;
+      font-size: 18px; padding: 16px 40px;
+    }
+    .join-section .btn:hover { background: #f0f0f0; }
+
+    footer {
+      text-align: center; padding: 25px;
+      background: #1a1a22; color: #666; font-size: 14px;
+      border-top: 1px solid #2a2a35;
+    }
+
+    [contenteditable="true"] {
+      outline: 2px dashed #5865F2; padding: 3px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .brand { font-size: 64px; letter-spacing: 8px; }
+      .hero h2 { font-size: 24px; }
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>ROCKET SITE</h1>
+    <button id="editBtn">✏️ Редактировать</button>
+    <h1 data-edit="title">VLKR</h1>
     <nav>
       <a href="#home">Главная</a>
-      <a href="#features">Возможности</a>
-      <a href="#contact">Контакты</a>
+      <a href="#features">О сервере</a>
+      <a href="https://discord.gg/wHDuyWFZD2" target="_blank">Discord</a>
     </nav>
   </header>
 
   <section class="hero" id="home">
-    <h2>Простой сайт готов</h2>
-    <p>Это базовый шаблон. Меняй текст, цвета и добавляй свои блоки.</p>
-    <a href="#features" class="btn">Смотреть дальше</a>
+    <div class="brand" data-edit="brand">VLKR</div>
+
+    <h2 data-edit="hero-title">Добро пожаловать в VLKR!</h2>
+    <p data-edit="hero-text">
+      Наш Discord-сервер — это место, где собираются игроки, общаются и находят друзей. Заходи, у нас движ!
+    </p>
+
+    <a href="https://discord.gg/wHDuyWFZD2" target="_blank" class="btn btn-discord">💬 Вступить в Discord</a>
+    <a href="#features" class="btn">Что у нас есть</a>
   </section>
 
   <section class="features" id="features">
     <div class="card">
-      <h3>Быстро</h3>
-      <p>Один HTML-файл, без сложных настроек. Открывается на любом телефоне.</p>
+      <h3 data-edit="c1-title">Общение</h3>
+      <p data-edit="c1-text">Текстовые и голосовые каналы для всех участников.</p>
     </div>
     <div class="card">
-      <h3>Красиво</h3>
-      <p>Тёмная тема, аккуратные блоки, адаптация под экран.</p>
+      <h3 data-edit="c2-title">Игры</h3>
+      <p data-edit="c2-text">Играем вместе в Roblox, CS и другие проекты.</p>
     </div>
     <div class="card">
-      <h3>Бесплатно</h3>
-      <p>Можно выложить в интернет через GitHub Pages, Netlify или Vercel.</p>
+      <h3 data-edit="c3-title">Ивенты</h3>
+      <p data-edit="c3-text">Регулярные конкурсы и розыгрыши для участников.</p>
     </div>
   </section>
 
-  <footer id="contact">
-    <p>© 2026 Мой сайт. Сделано вручную.</p>
+  <section class="join-section">
+    <h2 data-edit="join-title">Готов присоединиться?</h2>
+    <p data-edit="join-text">Жми на кнопку ниже — и ты уже в нашем сервере VLKR.</p>
+    <a href="https://discord.gg/wHDuyWFZD2" target="_blank" class="btn">🚀 Вступить в VLKR</a>
+  </section>
+
+  <footer>
+    <p data-edit="footer">© 2026 VLKR. Все права защищены.</p>
   </footer>
 
   <script>
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    const editBtn = document.getElementById('editBtn');
+    let editMode = false;
+
+    document.querySelectorAll('[data-edit]').forEach(el => {
+      const key = 'site_' + el.dataset.edit;
+      const saved = localStorage.getItem(key);
+      if (saved) el.textContent = saved;
+    });
+
+    editBtn.addEventListener('click', () => {
+      editMode = !editMode;
+      document.querySelectorAll('[data-edit]').forEach(el => {
+        el.contentEditable = editMode;
       });
+      editBtn.textContent = editMode ? '💾 Сохранить' : '✏️ Редактировать';
+      editBtn.style.background = editMode ? '#00a800' : '#5865F2';
+
+      if (!editMode) {
+        document.querySelectorAll('[data-edit]').forEach(el => {
+          localStorage.setItem('site_' + el.dataset.edit, el.textContent);
+        });
+        alert('Сохранено! Обнови страницу — изменения на месте.');
+      }
     });
   </script>
 
